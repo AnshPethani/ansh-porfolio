@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 
-import Section from "@/components/layout/Section";
+import Section from "@/components/ui/Section";
 import { publications } from "@/lib/data";
 
 export function PublicationsSection() {

@@ -1,8 +1,8 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 
-import GraphMotif from "@/components/GraphMotif";
-import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
+import GraphMotif from "@/components/ui/GraphMotif";
 import IconLink from "@/components/ui/IconLink";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import { social } from "@/lib/data";
@@ -10,7 +10,11 @@ import { site } from "@/lib/site";
 
 export function Hero() {
   return (
-    <section aria-labelledby="hero-heading" className="relative pb-section pt-16 sm:pt-24">
+    <section
+      id="hero"
+      aria-labelledby="hero-heading"
+      className="relative pb-section pt-16 sm:pt-24"
+    >
       <Container className="relative">
         {/* Sits behind the text on wide screens; withheld on mobile where space is tight. */}
         <GraphMotif
@@ -20,7 +24,7 @@ export function Hero() {
         />
 
         <div className="relative max-w-prose">
-          <SectionEyebrow>MSCS @ NC State · AI/ML Research &amp; Engineering</SectionEyebrow>
+          <SectionEyebrow>MSCS @ NC State · AI/ML Research &amp; Computer Science Engineering</SectionEyebrow>
 
           <h1 id="hero-heading" className="mt-6 text-3xl font-semibold sm:text-4xl">
             {site.name}

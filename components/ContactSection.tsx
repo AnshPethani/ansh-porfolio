@@ -1,8 +1,8 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 
-import GraphMotif from "@/components/GraphMotif";
-import Section from "@/components/layout/Section";
+import Section from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
+import GraphMotif from "@/components/ui/GraphMotif";
 import IconLink from "@/components/ui/IconLink";
 import { social } from "@/lib/data";
 
@@ -15,14 +15,9 @@ export function ContactSection() {
   return (
     <Section id="contact" eyebrow="Get In Touch" heading="Let’s talk" width="prose">
       <div className="relative">
-        <GraphMotif
-          variant="spine"
-          tone="accent"
-          className="pointer-events-none absolute -top-4 right-0 hidden w-40 sm:block"
-        />
 
         <p className="max-w-[34rem] text-lg text-ink-muted">
-          Open to new-grad SWE/ML roles and research collaborations — feel free to reach out.
+          Open to new-grad SWE/ML/DS roles and research collaborations, please feel free to reach out.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">

@@ -126,19 +126,32 @@ export function GraphMotif({
       </g>
 
       <g>
+        {/*
+         * The fade animates a wrapper rather than the circle, because the
+         * keyframe's final `opacity: 1` would otherwise win over each node's
+         * own opacity and flatten the highlight/rest distinction.
+         */}
         {nodes.map((node, i) => (
-          <circle
+          <g
             key={i}
-            cx={node.x}
-            cy={node.y}
-            r={node.r ?? 3}
-            fill={node.highlight ? "rgb(var(--accent))" : "rgb(var(--surface))"}
-            stroke={node.highlight ? "rgb(var(--accent))" : stroke}
-            strokeWidth={1}
-            opacity={node.highlight ? 0.85 : 0.45}
             className={animated ? "motion-safe:animate-fade-rise" : undefined}
             style={animated ? { animationDelay: `${i * 90}ms` } : undefined}
-          />
+          >
+            {/*
+             * Fills stay opaque and the ring carries the fade, so edges are
+             * hidden behind the nodes they connect instead of showing through.
+             */}
+            <circle
+              cx={node.x}
+              cy={node.y}
+              r={node.r ?? 3}
+              fill={node.highlight ? "rgb(var(--accent))" : "rgb(var(--surface))"}
+              fillOpacity={node.highlight ? 0.9 : 1}
+              stroke={node.highlight ? "rgb(var(--accent))" : stroke}
+              strokeWidth={1}
+              strokeOpacity={node.highlight ? 0.9 : 0.45}
+            />
+          </g>
         ))}
       </g>
     </svg>

@@ -1,3 +1,20 @@
+import { withBasePath } from "@/lib/basePath";
+
+/*
+ * TODO(ansh): values to confirm before launch —
+ *   1. `social.github` / `social.linkedin` / `social.email` below: verify these
+ *      are the handles you want public.
+ *   2. public/resume.pdf is your real resume as of Aug 2026. Note it lists a
+ *      phone number, which the site itself deliberately omits — see the comment
+ *      in components/ContactSection.tsx. Swap the file to update it; this path
+ *      does not change.
+ *   3. The Hueb role has no `url` because the only link available was a
+ *      tracking URL that could not be verified — add the canonical company URL
+ *      and it will render as a link automatically.
+ *   4. Project `url` fields are omitted until repos/demos are public. Adding one
+ *      makes the link icon appear on that card.
+ */
+
 export type Role = {
   company: string;
   title: string;
@@ -49,8 +66,9 @@ export const roles: Role[] = [
   {
     company: "iEXCEL Lab, CS Department, NC State University",
     title: "Research Associate",
-    url: "https://www.ncsu.edu",
+    url: "https://sites.google.com/ncsu.edu/draditimallavarapu",
     period: "Aug 2026 – Present",
+    location: "Raleigh, NC, USA",
     tier: "main",
     bullets: [
       "Managing CI/CD pipelines and backend deployments, maintaining backend integrations, and adding features to webpages",
@@ -63,8 +81,9 @@ export const roles: Role[] = [
   {
     company: "IEC Lab, CS Department, NC State University",
     title: "Research Associate",
-    url: "https://www.ncsu.edu",
+    url: "https://www.ieclab.org/",
     period: "Aug 2025 – Aug 2026",
+    location: "Raleigh, NC, USA",
     tier: "main",
     bullets: [
       "Developed Python ETL pipelines to parse, clean, and resolve conflicts across CSV, XML & JSON records",
@@ -103,7 +122,7 @@ export const roles: Role[] = [
   {
     company: "Hueb",
     title: "Technical Intern",
-    url: "https://www.hueb.com/?srsltid=AfmBOoof_ODuZBlK26Qek1fUGBHe7OXrA7EOOlVPYRW4ZTOiLI-VT5L0",
+    url: "https://www.hueb.com/",
     period: "Nov 2023 – Dec 2023",
     location: "Remote",
     tier: "earlier",
@@ -235,5 +254,4 @@ export const social = {
   github: "https://github.com/AnshPethani",
 } as const;
 
-/** TODO(ansh): replace public/resume.pdf with the real resume export. */
-export const resumeUrl = "/resume.pdf";
+export const resumeUrl = withBasePath("/resume.pdf");

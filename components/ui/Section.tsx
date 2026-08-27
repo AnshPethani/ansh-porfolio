@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
-import Container from "@/components/layout/Container";
+import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import { cn } from "@/lib/cn";
 
@@ -9,7 +10,11 @@ export type SectionProps = {
   id: string;
   eyebrow: string;
   heading: string;
-  /** `prose` for text-heavy sections, `content` for card grids. */
+  /**
+   * Narrows the text column for text-heavy sections. The container itself stays
+   * at content width either way, so every section — and the hero — shares one
+   * left edge instead of re-centering per section.
+   */
   width?: "prose" | "content";
   className?: string;
   children: ReactNode;
@@ -27,12 +32,19 @@ export function Section({
 
   return (
     <section id={id} aria-labelledby={headingId} className={cn("py-section", className)}>
-      <Container width={width}>
-        <SectionEyebrow>{eyebrow}</SectionEyebrow>
-        <h2 id={headingId} className="mt-4 text-2xl">
-          {heading}
-        </h2>
-        <div className="mt-10">{children}</div>
+      <Container width="content">
+        <div className={cn(width === "prose" && "max-w-prose")}>
+          {/* Heading block leads, body follows a beat later. */}
+          <Reveal>
+            <SectionEyebrow>{eyebrow}</SectionEyebrow>
+            <h2 id={headingId} className="mt-4 text-2xl">
+              {heading}
+            </h2>
+          </Reveal>
+          <Reveal delayMs={90} className="mt-10">
+            {children}
+          </Reveal>
+        </div>
       </Container>
     </section>
   );

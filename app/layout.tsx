@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
-import Footer from "@/components/layout/Footer";
-import Header from "@/components/layout/Header";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import { site } from "@/lib/site";
 
 import { fontVariables } from "./fonts";
@@ -9,18 +9,36 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: `${site.name} — ${site.role}`,
+    default: `${site.name} — ${site.tagline}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
   metadataBase: new URL(site.url),
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  keywords: [
+    "Ansh Pethani",
+    "NC State University",
+    "machine learning",
+    "graph neural networks",
+    "full-stack engineer",
+    "computer science",
+  ],
   openGraph: {
-    title: `${site.name} — ${site.role}`,
+    title: `${site.name} — ${site.tagline}`,
     description: site.description,
     url: site.url,
     siteName: site.name,
+    locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -31,6 +49,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={fontVariables}>
       <body className="flex min-h-dvh flex-col">
+        {/* Without JS the scroll reveals never fire, so unhide them outright. */}
+        <noscript>
+          <style>{".reveal{opacity:1 !important;transform:none !important}"}</style>
+        </noscript>
+
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[60] focus:rounded focus:border focus:border-line focus:bg-surface focus:px-3 focus:py-2 focus:font-mono focus:text-sm focus:uppercase focus:tracking-label focus:text-ink"

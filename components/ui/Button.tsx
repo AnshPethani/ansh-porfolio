@@ -8,10 +8,13 @@ type Size = "sm" | "md";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded font-sans font-medium " +
-  "transition-colors disabled:pointer-events-none disabled:opacity-50";
+  "transition-[color,background-color,border-color,filter] " +
+  "disabled:pointer-events-none disabled:opacity-50";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-accent text-surface hover:bg-ink",
+  // Primary stays accent-filled on hover and only deepens, rather than
+  // switching hue; secondary fills its outline in with the accent.
+  primary: "bg-accent text-surface hover:brightness-90",
   secondary: "border border-accent bg-transparent text-accent hover:bg-accent hover:text-surface",
 };
 

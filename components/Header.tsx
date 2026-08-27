@@ -13,14 +13,37 @@ const sectionIds = navItems.map((item) => item.href.replace("#", ""));
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
+  /*
+   * Three stages, so the header is invisible at rest without letting hero
+   * content collide with the nav on the way past:
+   *   at the top   — fully transparent, no border
+   *   scrolling    — faint backdrop so text passes behind it, still no border
+   *   past the hero — firmer backdrop plus the hairline
+   */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Watching the hero element keeps the last stage correct no matter how tall
+  // the hero renders at a given breakpoint.
+  useEffect(() => {
+    const hero = document.getElementById("hero");
+    if (!hero || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPastHero(entry ? !entry.isIntersecting : false),
+      { rootMargin: "-60px 0px 0px 0px", threshold: 0 },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   // Highlights the section currently sitting under the header.
@@ -29,7 +52,7 @@ export function Header() {
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => el !== null);
 
-    if (sections.length === 0) return;
+    if (sections.length === 0 || typeof IntersectionObserver === "undefined") return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -59,12 +82,21 @@ export function Header() {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
+  const settled = pastHero || menuOpen;
+
   return (
-    <header className="sticky top-0 z-50 bg-bg/85 backdrop-blur-sm">
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-colors",
+        !scrolled && !menuOpen && "bg-transparent",
+        scrolled && !settled && "bg-bg/70 backdrop-blur-sm",
+        settled && "bg-bg/90 backdrop-blur-sm",
+      )}
+    >
       <div
         className={cn(
           "border-b transition-colors",
-          scrolled && !menuOpen ? "border-line" : "border-transparent",
+          pastHero && !menuOpen ? "border-line" : "border-transparent",
         )}
       >
         <div className="mx-auto flex h-header max-w-content items-center gap-4 px-5 sm:px-8">
@@ -126,7 +158,7 @@ export function Header() {
         id="mobile-nav"
         aria-hidden={!menuOpen}
         className={cn(
-          "overflow-hidden border-b bg-bg/95 lg:hidden",
+          "overflow-hidden border-b bg-bg/95 backdrop-blur-sm lg:hidden",
           "motion-safe:transition-[max-height,border-color] motion-safe:duration-300",
           menuOpen ? "max-h-96 border-line" : "max-h-0 border-transparent",
         )}

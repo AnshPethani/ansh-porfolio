@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 
 export type CardProps = HTMLAttributes<HTMLElement> & {
   as?: ElementType;
-  /** Adds a restrained hover treatment for cards that wrap a link. */
+  /** Adds the soft blur on hover for cards that wrap a link. */
   interactive?: boolean;
   children: ReactNode;
 };
@@ -19,9 +19,12 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "rounded-card border border-line bg-surface p-6",
-        interactive &&
-          "transition-colors hover:border-accent/40 motion-safe:transition-shadow motion-safe:hover:shadow-soft",
+        "card-hover rounded-card border border-line bg-surface p-6",
+        // 2px lift + hairline shifting to the accent. The lift is dropped under
+        // prefers-reduced-motion (see globals.css) while the border stays.
+        "transition-[transform,border-color,box-shadow] hover:border-accent",
+        "motion-safe:hover:-translate-y-[2px]",
+        interactive && "motion-safe:hover:shadow-soft",
         className,
       )}
       {...rest}

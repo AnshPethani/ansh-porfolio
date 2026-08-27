@@ -1,4 +1,4 @@
-import Section from "@/components/layout/Section";
+import Section from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
 import { coursework, skillGroups } from "@/lib/data";
 

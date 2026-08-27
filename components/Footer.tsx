@@ -1,7 +1,7 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
-import Container from "@/components/layout/Container";
+import Container from "@/components/ui/Container";
 import IconLink from "@/components/ui/IconLink";
 import { social } from "@/lib/data";
 import { site } from "@/lib/site";

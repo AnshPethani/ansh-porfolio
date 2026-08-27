@@ -66,6 +66,28 @@
   }
 }
 
+@layer components {
+  /*
+   * Scroll reveal. Starts hidden and is released by Reveal.tsx; both the
+   * reduced-motion block below and a <noscript> rule in the root layout force
+   * it visible, so content never depends on JS or on motion being allowed.
+   */
+  .reveal {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-revealed {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+}
+
 @layer utilities {
   /*
    * Optical-size overrides for cases where the rendered size should not drive
@@ -105,6 +127,18 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Reveals resolve to their final state instead of animating in. */
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* No hover lift, only the border colour change. */
+  .card-hover:hover {
+    transform: none !important;
   }
 }

@@ -18,11 +18,17 @@ export function SectionEyebrow({ children, id, className }: SectionEyebrowProps)
     <p
       id={id}
       className={cn(
-        "flex items-center gap-2.5 font-mono text-sm uppercase tracking-label-wide text-ink-muted",
+        "flex items-start gap-2.5 font-mono text-sm uppercase tracking-label-wide text-ink-muted",
         className,
       )}
     >
-      <svg viewBox="0 0 8 8" className="h-2 w-2 shrink-0" fill="none" aria-hidden="true">
+      {/* Aligned to the first line so a wrapped eyebrow keeps the node up top. */}
+      <svg
+        viewBox="0 0 8 8"
+        className="mt-[0.5em] h-2 w-2 shrink-0"
+        fill="none"
+        aria-hidden="true"
+      >
         <circle cx="4" cy="4" r="3" fill="rgb(var(--accent))" opacity="0.85" />
       </svg>
       {children}

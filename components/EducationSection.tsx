@@ -1,4 +1,4 @@
-import Section from "@/components/layout/Section";
+import Section from "@/components/ui/Section";
 import Card from "@/components/ui/Card";
 import ExternalLink from "@/components/ui/ExternalLink";
 import { education } from "@/lib/data";

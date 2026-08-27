@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
-import Section from "@/components/layout/Section";
 import Card from "@/components/ui/Card";
+import Section from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
 import { projects } from "@/lib/data";
 

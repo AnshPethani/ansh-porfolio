@@ -1,6 +1,6 @@
-import Section from "@/components/layout/Section";
 import Card from "@/components/ui/Card";
 import ExternalLink from "@/components/ui/ExternalLink";
+import Section from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
 import { earlierRoles, mainRoles, type Role } from "@/lib/data";
