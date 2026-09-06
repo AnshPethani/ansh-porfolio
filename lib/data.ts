@@ -198,6 +198,23 @@ export const education: Education[] = [
 
 export const projects: Project[] = [
   {
+    name: "Hungry Wolf",
+    year: "2025",
+    pitch:
+      "Gamified food delivery platform. Built the delivery module end-to-end — backend routes and models plus the frontend order-management UI — and fixed the CI/CD pipeline for the full-stack ordering experience.",
+    tech: [
+      "React 18",
+      "React Router",
+      "React Query",
+      "Node.js",
+      "Express.js",
+      "Firebase Firestore",
+      "Firebase Auth",
+      "CSS",
+    ],
+    url: "https://github.com/yashvinshah/SE_2025_projects/tree/main/proj2",
+  },
+  {
     name: "NBA/ABA Statistics and Future Predictions",
     year: "2025",
     pitch:

@@ -18,6 +18,7 @@ yarn-error.log*
 next-env.d.ts
 *.tsbuildinfo
 
-# Source photo originals, kept out of the build and the repo.
+# Full-resolution originals stay local; public/portrait.jpg is the cropped
+# hero image and must be committed so GitHub Pages can serve it.
 /assets/
-public/portrait.jpg
+.audit/
