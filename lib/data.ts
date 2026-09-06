@@ -302,9 +302,9 @@ export const resumeUrl = withBasePath("/resume.pdf");
 /**
  * Half-body crop from assets/portrait-original.jpeg, exported at 720×960 (3:4)
  * so it matches the hero frame. `images.unoptimized` means Next ships this
- * file untouched — replace public/portrait.jpg to change the photo.
+ * file untouched — replace public/portrait.png to change the photo.
  *
  * Prefixed by hand: with `images.unoptimized` (required by GitHub Pages),
  * next/image passes the src straight through without applying basePath.
  */
-export const portraitUrl = withBasePath("/portrait.jpg");
+export const portraitUrl = withBasePath("/portrait.png");

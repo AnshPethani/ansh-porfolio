@@ -41,7 +41,7 @@ lib/
   data.ts             all page content — roles, education, projects, publications, skills, social
   site.ts             site metadata + nav items
 public/
-  portrait.jpg        hero photo next to the name (3:4 crop, face toward the top)
+  portrait.png        hero photo next to the name (3:4 crop, face toward the top)
   resume.pdf          linked from the header Resume button
   .nojekyll           stops GitHub Pages from running Jekyll (which ignores _next/)
 scripts/
