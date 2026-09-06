@@ -19,11 +19,11 @@ export function Hero() {
           <Image
             src={portraitUrl}
             alt={`Portrait of ${site.name}`}
-            width={700}
-            height={900}
+            width={720}
+            height={960}
             priority
-            sizes="(min-width: 1024px) 18rem, 11rem"
-            className="aspect-[3/4] w-36 rounded-card border border-line object-cover object-top sm:w-44 lg:col-start-2 lg:row-start-1 lg:w-64 xl:w-72"
+            sizes="(min-width: 1280px) 20rem, (min-width: 1024px) 18rem, 13rem"
+            className="h-auto w-44 object-contain sm:w-52 lg:col-start-2 lg:row-start-1 lg:w-72 xl:w-80"
           />
 
           <div className="max-w-prose lg:col-start-1 lg:row-start-1">
