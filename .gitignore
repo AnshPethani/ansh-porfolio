@@ -17,3 +17,7 @@ yarn-error.log*
 .vercel
 next-env.d.ts
 *.tsbuildinfo
+
+# Source photo originals, kept out of the build and the repo.
+/assets/
+public/portrait.jpg

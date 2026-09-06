@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import { site } from "@/lib/site";
 
@@ -49,11 +48,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={fontVariables}>
       <body className="flex min-h-dvh flex-col">
-        {/* Without JS the scroll reveals never fire, so unhide them outright. */}
-        <noscript>
-          <style>{".reveal{opacity:1 !important;transform:none !important}"}</style>
-        </noscript>
-
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-[60] focus:rounded focus:border focus:border-line focus:bg-surface focus:px-3 focus:py-2 focus:font-mono focus:text-sm focus:uppercase focus:tracking-label focus:text-ink"
@@ -64,7 +58,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" className="flex-1">
           {children}
         </main>
-        <Footer />
       </body>
     </html>
   );

@@ -3,11 +3,11 @@ import ExternalLink from "@/components/ui/ExternalLink";
 
 export function About() {
   return (
-    <Section id="about" eyebrow="About" heading="About" width="prose">
+    <Section id="about" heading="About" width="prose">
       <div className="space-y-5 text-lg text-ink-muted">
         <p>
-          I&rsquo;m a Master of Computer Science candidate at{" "}
-          <ExternalLink href="https://www.ncsu.edu">NC State University</ExternalLink>, holding a 4.0
+          I&rsquo;m a Master of Computer Science student at
+          North Carolina State University, holding a 4.0
           GPA, after a B.Tech in Information Technology from Vellore Institute of Technology
           (8.91/10 CGPA).
         </p>

@@ -1,10 +1,10 @@
 import Section from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
-import { coursework, skillGroups } from "@/lib/data";
+import { skillGroups } from "@/lib/data";
 
 export function SkillsSection() {
   return (
-    <Section id="skills" eyebrow="Skills" heading="Tools I work with">
+    <Section id="skills" heading="Tools I work with">
       <dl className="divide-y divide-line border-t border-line">
         {skillGroups.map((group) => (
           <div
@@ -20,13 +20,6 @@ export function SkillsSection() {
           </div>
         ))}
       </dl>
-
-      {/* Coursework stays a caption, not another pill cluster, so it reads as context. */}
-      <p className="mt-8 font-mono text-sm leading-relaxed text-ink-muted/80">
-        <span className="uppercase tracking-label">Relevant coursework</span>
-        {" — "}
-        {coursework.join(", ")}
-      </p>
     </Section>
   );
 }

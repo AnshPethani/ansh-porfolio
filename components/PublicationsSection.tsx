@@ -5,7 +5,7 @@ import { publications } from "@/lib/data";
 
 export function PublicationsSection() {
   return (
-    <Section id="publications" eyebrow="Publications" heading="Publications" width="prose">
+    <Section id="publications" heading="Publications" width="prose">
       {/* Citation list rather than cards — the academic convention reads better here. */}
       <ol className="divide-y divide-line border-y border-line">
         {publications.map((publication) => (

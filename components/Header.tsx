@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type MouseEvent } from "react";
 
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
@@ -80,6 +80,32 @@ export function Header() {
   const scrollToTop = useCallback(() => {
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
+  /**
+   * Close the hamburger first, then scroll. If we let the browser jump while
+   * the menu is still expanded, the sticky header is ~300px taller than it
+   * will be a moment later — Experience lands on the second role instead of
+   * the section heading.
+   */
+  const goToSection = useCallback((href: string) => {
+    return (event: MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      const id = href.replace("#", "");
+      setMenuOpen(false);
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.setTimeout(
+        () => {
+          document.getElementById(id)?.scrollIntoView({
+            behavior: reduced ? "auto" : "smooth",
+            block: "start",
+          });
+          window.history.replaceState(null, "", href);
+        },
+        reduced ? 0 : 320,
+      );
+    };
   }, []);
 
   const settled = pastHero || menuOpen;
@@ -171,7 +197,7 @@ export function Header() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    onClick={() => setMenuOpen(false)}
+                    onClick={goToSection(item.href)}
                     aria-current={active ? "true" : undefined}
                     tabIndex={menuOpen ? undefined : -1}
                     className={cn(

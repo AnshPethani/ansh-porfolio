@@ -25,22 +25,23 @@ no `start` script: `output: "export"` produces static files, and there's no serv
 ```
 app/
   fonts.ts            next/font declarations → --font-display / --font-body / --font-mono
-  globals.css         design tokens, base styles, reveal, focus + reduced-motion rules
+  globals.css         design tokens, base styles, focus + reduced-motion rules
   icon.svg            favicon (graph-motif monogram)
-  layout.tsx          metadata, skip link, sticky header, <main>, footer
+  layout.tsx          metadata, skip link, sticky header, <main>
   page.tsx            single-page composition of the sections below
 components/
-  Header.tsx Footer.tsx
+  Header.tsx
   Hero.tsx About.tsx ExperienceSection.tsx EducationSection.tsx
   ProjectsSection.tsx PublicationsSection.tsx SkillsSection.tsx ContactSection.tsx
-  ui/                 Button, Card, Tag, SectionEyebrow, GraphMotif,
-                      Container, Section, Reveal, ExternalLink, IconLink
+  ui/                 Button, Card, Tag, GraphMotif,
+                      Container, Section, ExternalLink, IconLink
 lib/
   basePath.ts         prefixes hand-written URLs for the GitHub Pages subpath
   cn.ts               className joiner
   data.ts             all page content — roles, education, projects, publications, skills, social
   site.ts             site metadata + nav items
 public/
+  portrait.jpg        hero photo next to the name (3:4 crop, face toward the top)
   resume.pdf          linked from the header Resume button
   .nojekyll           stops GitHub Pages from running Jekyll (which ignores _next/)
 .github/workflows/
@@ -67,7 +68,7 @@ Everything else stays in ink / ink-muted / paper tones. No gradients; the only p
 elevation is a hairline border or `shadow-soft` (4px blur at 8% ink).
 
 **Type** — Fraunces (display, weights 500/600, automatic optical sizing), Inter (body, 400/500),
-IBM Plex Mono (metadata: dates, tags, eyebrows). The scale is fixed at
+IBM Plex Mono (metadata: dates, tags, labels). The scale is fixed at
 `text-sm` 14 · `text-base` 16 · `text-lg` 18 · `text-xl` 24 · `text-2xl` 32 · `text-3xl` 48 ·
 `text-4xl` 64, with negative tracking baked into the large sizes. Reach for weight contrast
 before reaching for another color. The `.label` utility is the shorthand for mono metadata.
@@ -78,16 +79,12 @@ border at an 8px radius.
 
 ## Motion
 
-Four interactions, all small: section reveals, card hover lift, the header's background/hairline
-stages, and the graph motif drawing its edges in.
+Two interactions, both small: card hover lift (2px, dropped under reduced motion) and the
+header's background/hairline stages as you scroll past the hero. Section content is visible
+immediately — no scroll-triggered fade — so the page reads as fast as the browser can paint.
 
-`Reveal` (`components/ui/Reveal.tsx`) hides its children until an IntersectionObserver sees them.
-Because that starting state is real CSS, it has two escape hatches so content can never be
-stranded invisible: a `<noscript>` rule in `app/layout.tsx` unhides everything when JS is off, and
-the `prefers-reduced-motion` block in `globals.css` resolves reveals straight to their final state.
-
-Anything new that moves belongs behind Tailwind's `motion-safe:` prefix, or inside that
-reduced-motion block if it needs an explicit resting state.
+Anything new that moves belongs behind Tailwind's `motion-safe:` prefix, or inside the
+`prefers-reduced-motion` block in `globals.css` if it needs an explicit resting state.
 
 ## Accessibility
 
@@ -95,7 +92,7 @@ reduced-motion block if it needs an explicit resting state.
   interactive element.
 - `prefers-reduced-motion: reduce` cancels all animation, transition, and smooth scrolling, and
   drops the card hover lift while keeping the border colour change.
-- Semantic landmarks (`header` / `nav` / `main` / `footer`), one `h1`, an `h2` per section, and
+- Semantic landmarks (`header` / `nav` / `main`), one `h1`, an `h2` per section, and
   anchor `scroll-margin-top` sized to the sticky header.
 - The mobile menu sets `aria-expanded`/`aria-controls`, closes on Escape, and pulls its links out
   of the tab order while collapsed.

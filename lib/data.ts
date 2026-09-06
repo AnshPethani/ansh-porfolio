@@ -37,6 +37,7 @@ export type Education = {
   /** Pre-formatted because the two schools use different scales (4.0 vs 10). */
   grade: string;
   period: string;
+  coursework: string[];
 };
 
 export type Project = {
@@ -76,7 +77,7 @@ export const roles: Role[] = [
       "Integrating pre-trained multi-species computer vision pipelines into existing backend and frontend architectures",
       "Facilitating expert validation studies for a vision-model-based alt-text generator and deploying analytical tools driven by large-scale publication datasets",
     ],
-    tech: ["Graph Neural Networks", "Computer Vision", "CI/CD", "Python"],
+    tech: ["Graph Neural Networks", "Computer Vision", "Backend Development", "GenAI", "Python", "Git"],
   },
   {
     company: "IEC Lab, CS Department, NC State University",
@@ -90,7 +91,7 @@ export const roles: Role[] = [
       "Developed and optimized an LLM-based Python pipeline for automated quiz generation using student responses",
       "Researched embedding models and deployed NV-Embed-v2 to generate embeddings, evaluated via K-Means clustering",
     ],
-    tech: ["Python", "ETL", "LLMs", "NV-Embed-v2", "K-Means"],
+    tech: ["Python", "ETL", "LLMs", "NV-Embed-v2", "K-Means", "GenAI", "Git"],
   },
   {
     company: "IoTIoT",
@@ -117,7 +118,7 @@ export const roles: Role[] = [
       "Built and deployed a Gmail add-on for automated email risk assessment, an AutoEDA tool for PDF-based data analysis, and a data analytics platform",
       "Designed full-stack web applications using React, JavaScript, FastAPI, and PostgreSQL",
     ],
-    tech: ["YOLOv11", "RAG", "FastAPI", "React", "PostgreSQL"],
+    tech: ["YOLOv11", "RAG", "FastAPI", "ReactJS", "PostgreSQL", "GenAI", "Git"],
   },
   {
     company: "Hueb",
@@ -158,6 +159,17 @@ export const education: Education[] = [
     degree: "Master of Computer Science",
     grade: "GPA 4.0 / 4.0",
     period: "Aug 2025 – May 2027",
+    coursework: [
+      "Design & Analysis of Algorithms",
+      "Automated Learning & Data Analysis",
+      "Neural Networks",
+      "Deep Learning",
+      "Software Engineering",
+      "Computer & Network Security",
+      "Computer Networks",
+      "Advanced Robotics",
+      "Parallel Systems",
+    ],
   },
   {
     institution: "Vellore Institute of Technology",
@@ -165,6 +177,22 @@ export const education: Education[] = [
     degree: "B.Tech, Information Technology",
     grade: "CGPA 8.91 / 10",
     period: "Sep 2021 – May 2025",
+    coursework: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Data Structures & Algorithms",
+      "Software Engineering",
+      "Cloud Computing",
+      "Big Data",
+      "Soft Computing",
+      "Computer Networks",
+      "Database Management Systems",
+      "Operating Systems",
+      "Information Security",
+      "Cyber Security",
+      "Computer Architecture",
+      "Network Information Security",
+    ],
   },
 ];
 
@@ -201,20 +229,20 @@ export const projects: Project[] = [
 
 export const publications: Publication[] = [
   {
-    authors: "Pethani, A., Nallakaruppan, M. K.",
-    year: "2024",
-    title: "Electronic Copyright and Legal Application Regarding Non-Fungible Tokens (NFTs)",
-    venue:
-      "Recent Trends in Intelligence Enabled Research (DoSIER 2023), Advances in Intelligent Systems and Computing, vol. 1457. Springer, Singapore.",
-    url: "https://link.springer.com/chapter/10.1007/978-981-97-2321-8_17",
-  },
-  {
     authors: "Nallakaruppan, M. K., Pethani, A., Pelusi, D.",
     year: "2025",
     title: "Data Security in the Age of Marketing: Safeguarding Customer Information and Compliance",
     venue: "Data Engineering for Data-driven Marketing, pp. 165–178. Emerald Publishing Limited.",
     url: "https://www.emerald.com/books/edited-volume/17020/chapter-abstract/94021750/Data-Security-in-the-Age-of-Marketing-Safeguarding-Customer-Information-and-Compliance",
   },
+  {
+    authors: "Pethani, A., Nallakaruppan, M. K.",
+    year: "2024",
+    title: "Electronic Copyright and Legal Application Regarding Non-Fungible Tokens (NFTs)",
+    venue:
+      "Recent Trends in Intelligence Enabled Research (DoSIER 2023), Advances in Intelligent Systems and Computing, vol. 1457. Springer, Singapore.",
+    url: "https://link.springer.com/chapter/10.1007/978-981-97-2321-8_17",
+  }
 ];
 
 export const skillGroups: SkillGroup[] = [
@@ -235,17 +263,7 @@ export const skillGroups: SkillGroup[] = [
   { category: "Frontend", items: ["React", "HTML", "CSS"] },
   { category: "Backend", items: ["FastAPI", "Flask", "REST APIs"] },
   { category: "Databases", items: ["PostgreSQL", "ChromaDB"] },
-  { category: "Tools", items: ["Git", "Linux", "Postman", "VS Code", "Rust", "Tauri"] },
-];
-
-export const coursework: string[] = [
-  "Design & Analysis of Algorithms",
-  "Machine Learning",
-  "Cloud Computing",
-  "Big Data",
-  "Computer & Network Security",
-  "Software Engineering",
-  "Database Management Systems",
+  { category: "Tools", items: ["GenAI","Git", "Linux", "Postman", "VS Code", "Rust", "Tauri"] },
 ];
 
 export const social = {
@@ -254,4 +272,22 @@ export const social = {
   github: "https://github.com/AnshPethani",
 } as const;
 
+/**
+ * Opens a Gmail compose window in the browser instead of handing off to
+ * whatever mail client the visitor's OS has registered for `mailto:`.
+ */
+export const emailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+  social.email,
+)}`;
+
 export const resumeUrl = withBasePath("/resume.pdf");
+
+/**
+ * Half-body crop from assets/portrait-original.jpeg, exported at 720×960 (3:4)
+ * so it matches the hero frame. `images.unoptimized` means Next ships this
+ * file untouched — replace public/portrait.jpg to change the photo.
+ *
+ * Prefixed by hand: with `images.unoptimized` (required by GitHub Pages),
+ * next/image passes the src straight through without applying basePath.
+ */
+export const portraitUrl = withBasePath("/portrait.jpg");
