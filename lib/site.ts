@@ -1,7 +1,6 @@
 /*
- * TODO(ansh): `url` is used for metadataBase (OpenGraph/canonical URLs).
- * Defaults to the user GitHub Pages site. For a custom domain, add public/CNAME
- * and set NEXT_PUBLIC_SITE_URL to match.
+ * Canonical site URL for OpenGraph/metadata. Primary live URL is the user
+ * Pages root. Override with NEXT_PUBLIC_SITE_URL for a custom domain.
  */
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://anshpethani.github.io";
 

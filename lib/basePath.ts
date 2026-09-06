@@ -1,7 +1,6 @@
 /**
  * Prefix for hand-written public URLs (resume, portrait). Empty when the site
- * is served from the domain root (user GitHub Pages). next/link applies its
- * own basePath when that option is set in next.config.js.
+ * is served from https://anshpethani.github.io/ (user Pages, no basePath).
  */
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 

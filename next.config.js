@@ -1,20 +1,19 @@
 /*
- * User-site deploy: this project is meant to live at
- * https://anshpethani.github.io (repo must be named anshpethani.github.io).
- * No basePath — Pages serves from the domain root.
+ * User-site deploy: live at https://anshpethani.github.io/
  *
- * Custom domain later? Add public/CNAME with the domain and set
- * NEXT_PUBLIC_SITE_URL to match.
+ * The GitHub repo must be named anshpethani.github.io for that URL to work.
+ * After `next build`, scripts/postbuild-legacy-redirect.mjs drops a redirect
+ * at out/ansh-porfolio/ so old application links still open the site.
+ *
+ * Custom domain? Add public/CNAME and set NEXT_PUBLIC_SITE_URL.
  */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  images: { unoptimized: true }, // no image optimization server on GH Pages
+  images: { unoptimized: true },
   trailingSlash: true,
   reactStrictMode: true,
   poweredByHeader: false,
-  // Empty in this config — kept so withBasePath() stays a single place for
-  // hand-written public/ URLs if a subpath is ever reintroduced.
   env: { NEXT_PUBLIC_BASE_PATH: "" },
 };
 

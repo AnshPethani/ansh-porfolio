@@ -36,7 +36,7 @@ components/
   ui/                 Button, Card, Tag, GraphMotif,
                       Container, Section, ExternalLink, IconLink
 lib/
-  basePath.ts         optional prefix helper for hand-written public/ URLs (empty for user Pages)
+  basePath.ts         optional prefix helper for public/ URLs (empty on user Pages)
   cn.ts               className joiner
   data.ts             all page content — roles, education, projects, publications, skills, social
   site.ts             site metadata + nav items
@@ -44,9 +44,11 @@ public/
   portrait.jpg        hero photo next to the name (3:4 crop, face toward the top)
   resume.pdf          linked from the header Resume button
   .nojekyll           stops GitHub Pages from running Jekyll (which ignores _next/)
+scripts/
+  postbuild-legacy-redirect.js   writes out/ansh-porfolio/ → redirect to site root
 .github/workflows/
   deploy.yml          build + publish on every push to main
-next.config.js        static export for GitHub Pages (no basePath — user site at domain root)
+next.config.js        static export for https://anshpethani.github.io/ (no basePath)
 ```
 
 All copy lives in `lib/data.ts`; the section components only lay it out. Adding a role or project
@@ -101,30 +103,33 @@ Anything new that moves belongs behind Tailwind's `motion-safe:` prefix, or insi
 
 ## Deployment
 
-Hosted on GitHub Pages as a **user site** at `https://anshpethani.github.io`. Every push to
-`main` triggers `.github/workflows/deploy.yml`, which runs `npm ci && npm run build` and publishes
-`out/`.
+**Primary URL:** https://anshpethani.github.io/  
+**Legacy URL (redirects):** https://anshpethani.github.io/ansh-porfolio/
 
-**Required GitHub setup**
+The full site is served from the domain root. After each `next build`,
+`scripts/postbuild-legacy-redirect.js` adds `out/ansh-porfolio/index.html` that
+redirects to `/`, so old application links still open the portfolio.
 
-1. The repository **must** be named `anshpethani.github.io` (GitHub only serves the bare
-   `https://<user>.github.io` URL from a repo with that exact name). Rename at
-   **Settings → General → Repository name** if it is still `ansh-porfolio`.
-2. **Settings → Pages → Build and deployment → Source** → **GitHub Actions**.
+**Required: rename the GitHub repo** to `anshpethani.github.io` (Settings → General →
+Repository name). GitHub only serves `https://<user>.github.io` from a repo with that
+exact name. Then:
 
-After a green Actions run the site is live at `https://anshpethani.github.io/`.
+```bash
+git remote set-url origin https://github.com/AnshPethani/anshpethani.github.io.git
+```
 
-There is no `basePath` — assets load from the domain root. Local preview of the export:
+**Pages source:** Settings → Pages → Source → **GitHub Actions**.
 
 ```bash
 npm run build
-npx serve out          # http://localhost:3000
+npx serve out
+# http://localhost:3000/              → site
+# http://localhost:3000/ansh-porfolio/ → redirect to /
 ```
 
 ### Custom domain
 
-Add a `public/CNAME` file containing only the domain (e.g. `anshpethani.com`), set
-`NEXT_PUBLIC_SITE_URL` to the same domain, and point DNS at GitHub Pages.
+Add `public/CNAME` with the domain, set `NEXT_PUBLIC_SITE_URL`, point DNS at GitHub Pages.
 
 ## Note on Next.js 14
 
