@@ -1,7 +1,7 @@
 /**
- * GitHub Pages serves this site from a subpath, so any URL written by hand —
- * rather than through next/link or next/image, which apply basePath themselves —
- * has to be prefixed. Inlined at build time from next.config.js.
+ * Prefix for hand-written public URLs (resume, portrait). Empty when the site
+ * is served from the domain root (user GitHub Pages). next/link applies its
+ * own basePath when that option is set in next.config.js.
  */
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
