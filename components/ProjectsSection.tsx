@@ -1,37 +1,48 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
 import { useCallback, useId, useState } from "react";
 
 import Card from "@/components/ui/Card";
+import ExternalLink from "@/components/ui/ExternalLink";
 import OverlayDialog from "@/components/ui/OverlayDialog";
 import Section from "@/components/ui/Section";
 import { TagList } from "@/components/ui/Tag";
 import { projects, type Project } from "@/lib/data";
 import { useCloseOnDesktop } from "@/lib/useCloseOnDesktop";
 
+function ProjectTitle({
+  project,
+  headingId,
+  className = "text-xl",
+}: {
+  project: Project;
+  headingId?: string;
+  className?: string;
+}) {
+  if (project.url) {
+    return (
+      <h3 id={headingId} className={className}>
+        <ExternalLink href={project.url} className="text-ink no-underline hover:text-accent hover:underline">
+          {project.name}
+        </ExternalLink>
+      </h3>
+    );
+  }
+
+  return (
+    <h3 id={headingId} className={className}>
+      {project.name}
+    </h3>
+  );
+}
+
 function ProjectDetail({ project, headingId }: { project: Project; headingId?: string }) {
   return (
     <>
       <p className="font-mono text-sm uppercase tracking-label text-ink-muted">{project.year}</p>
-
-      <div className="mt-3 flex items-start justify-between gap-4">
-        <h3 id={headingId} className="text-xl">
-          {project.name}
-        </h3>
-        {project.url ? (
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.name} — open project`}
-            className="mt-1 shrink-0 rounded-sm text-ink-muted transition-colors hover:text-accent"
-          >
-            <ArrowUpRight aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.75} />
-          </a>
-        ) : null}
+      <div className="mt-3">
+        <ProjectTitle project={project} headingId={headingId} />
       </div>
-
       <p className="mt-4 text-base text-ink-muted">{project.pitch}</p>
       <TagList items={project.tech} className="mt-6" />
     </>
@@ -58,19 +69,8 @@ export function ProjectsSection() {
             <p className="font-mono text-sm uppercase tracking-label text-ink-muted">
               {project.year}
             </p>
-            <div className="mt-3 flex items-start justify-between gap-4">
-              <h3 className="text-xl">{project.name}</h3>
-              {project.url ? (
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.name} — open project`}
-                  className="mt-1 shrink-0 rounded-sm text-ink-muted transition-colors hover:text-accent"
-                >
-                  <ArrowUpRight aria-hidden="true" className="h-[18px] w-[18px]" strokeWidth={1.75} />
-                </a>
-              ) : null}
+            <div className="mt-3">
+              <ProjectTitle project={project} />
             </div>
             <p className="mt-4 text-base text-ink-muted">{project.pitch}</p>
             <TagList items={project.tech} className="mt-auto pt-6" />

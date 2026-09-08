@@ -11,8 +11,8 @@ import { withBasePath } from "@/lib/basePath";
  *   3. The Hueb role has no `url` because the only link available was a
  *      tracking URL that could not be verified — add the canonical company URL
  *      and it will render as a link automatically.
- *   4. Project `url` fields are omitted until repos/demos are public. Adding one
- *      makes the link icon appear on that card.
+ *   4. Project `url` fields are optional — when set, the title links out to the
+ *      repo or demo.
  */
 
 export type Role = {
@@ -45,7 +45,7 @@ export type Project = {
   year: string;
   pitch: string;
   tech: string[];
-  /** Absent until a repo or demo is public — the link icon is hidden when empty. */
+  /** Absent until a repo or demo is public — the title stays plain text when empty. */
   url?: string;
 };
 
@@ -234,13 +234,30 @@ export const projects: Project[] = [
     pitch:
       "A streaming pipeline that scrapes the web and re-analyzes the incoming data every five seconds, redrawing its visualizations automatically as each new batch lands rather than waiting on a manual refresh.",
     tech: ["Python", "PySpark", "Hadoop"],
+    url: "https://github.com/AnshPethani/Spark-Streaming",
   },
   {
     name: "Socket Programming Chat App",
     year: "2023",
     pitch:
-      "A multi-machine chat client built directly on Python TCP sockets — no framework in between — to work through connection handling, message framing, and concurrent clients from first principles.",
+      "A multi-machine chat application built in Python with sockets, enabling communication between systems on the same network over TCP.",
     tech: ["Python", "TCP Sockets"],
+    url: "https://github.com/AnshPethani/Socket-Prgm",
+  },
+  {
+    name: "Unmanned Ground Rover",
+    year: "2023",
+    pitch:
+      "Python camera integration for recording and a real-time feed on an Arduino + Jetson rover, plus an image-processing model for snake detection.",
+    tech: ["Python", "Arduino", "Jetson", "Computer Vision"],
+  },
+  {
+    name: "ISMAFDS",
+    year: "2023",
+    pitch:
+      "Website for the International Symposium on Mathematical Analysis of Fractals & Dynamical Systems at VIT Vellore, built from a template.",
+    tech: ["HTML", "CSS", "JavaScript", "Bootstrap", "jQuery"],
+    url: "https://vit.ac.in/ISMAFDS-2023/",
   },
 ];
 
